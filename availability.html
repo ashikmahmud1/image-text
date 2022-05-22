@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet"
+        type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <style>
+
+        .cl-calendar-time-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.7143rem;
+            width: 80px;
+            height: 60px;
+            color: #999;
+        }
+
+        .cl-calendar-time-cell span {
+            display: block;
+            transform: translateY(70px);
+            width: 100%;
+            text-align: right;
+        }
+
+        .day-header {
+            display: block;
+            position: sticky;
+            top: 110px;
+            z-index: 1001;
+        }
+
+        .weekly-view {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .cl-flex-fill {
+            flex: 1 1 auto !important;
+        }
+
+        .cl-d-flex {
+            display: flex !important;
+        }
+
+        .cl-w-100 {
+            width: 100%;
+        }
+
+        .cl-calendar-entry-cell {
+            height: 60px;
+            padding: 0 0.35715rem;
+            border-top: 1px dashed #C6D2D9;
+            border-left: 1px dashed #C6D2D9;
+            border-right: 1px dashed #C6D2D9;
+        }
+
+        .cl-calendar-entry-cell:last-child {
+            border-bottom: 1px dashed #C6D2D9;
+        }
+
+        .zoom-level-control {
+            display: block;
+            position: sticky;
+            top: 110px;
+            z-index: 1001;
+        }
+
+        .cl-calendar-header-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 4.2858rem;
+            padding: 0 0.7143rem;
+            background: #E4EAEE;
+            border-left: 1px solid #C6D2D9;
+            border-bottom: 1px solid #C6D2D9;
+            border-top: 1px solid #C6D2D9;
+        }
+
+        .cl-relative {
+            position: relative;
+        }
+
+        .fill-selected-time {
+            position: absolute;
+            width: 100%;
+            background-color: dimgray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="weekly-view">
+        <div class="text-center">
+            <div class="zoom-level-control"></div>
+            <div class="cl-calendar-time-cell-wrapper">
+                <div class="cl-calendar-time-cell"><span>08:00</span></div>
+                <div class="cl-calendar-time-cell"><span>09:00</span></div>
+                <div class="cl-calendar-time-cell"><span>10:00</span></div>
+                <div class="cl-calendar-time-cell"><span>11:00</span></div>
+                <div class="cl-calendar-time-cell"><span>12:00</span></div>
+                <div class="cl-calendar-time-cell"><span>13:00</span></div>
+                <div class="cl-calendar-time-cell"><span>14:00</span></div>
+                <div class="cl-calendar-time-cell"><span>15:00</span></div>
+                <div class="cl-calendar-time-cell"><span>16:00</span></div>
+                <div class="cl-calendar-time-cell"><span>17:00</span></div>
+                <div class="cl-calendar-time-cell"><span>18:00</span></div>
+                <div class="cl-calendar-time-cell"><span>19:00</span></div>
+                <div class="cl-calendar-time-cell"><span>20:00</span></div>
+                <div class="cl-calendar-time-cell"><span>21:00</span></div>
+                <div class="cl-calendar-time-cell"><span>22:00</span></div>
+                <div class="cl-calendar-time-cell"><span>23:00</span></div>
+                <div class="cl-calendar-time-cell"></div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Sun, May 22</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-1"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Mon, May 16</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-2"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Tue, May 17</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-3"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Wed, May 18</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-4"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Thu, May 19</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-5"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Fri, May 20</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-6"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl-d-flex cl-flex-fill cl-text-center cl-calendar-col">
+            <!---->
+            <div class="cl-w-100" title="">
+                <div class="no-teammates">
+                    <div class="cl-calendar-header-cell cl-calendar-header-cell-interactive">
+                        <div>
+                            <div>Sat, May 21</div>
+                            <div>00:00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-relative drop-zone">
+                    <div class="fill-selected-time" id="day-7"></div>
+                    <div class="day-header">
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                        <div class="cl-calendar-entry-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--THE SCRIPT SECTION.-->
+<script>
+    let initialStart = "08:00";
+    let weekSchedules = [
+        { FromTime: "08:00", ToTime: "23:59", WeekDay: "1" },
+        { FromTime: "09:00", ToTime: "12:30", WeekDay: "2" },
+        { FromTime: "08:00", ToTime: "12:30", WeekDay: "3" },
+        { FromTime: "08:00", ToTime: "12:30", WeekDay: "4" },
+        { FromTime: "08:00", ToTime: "12:30", WeekDay: "5" },
+        { FromTime: "08:00", ToTime: "8:00", WeekDay: "6" },
+        { FromTime: "08:00", ToTime: "12:30", WeekDay: "7" }
+    ]
+
+    function time2Minutes(timeA, timeB) {
+        let timeAHours = parseInt(timeA.split(":")[0]);
+        let timeBHours = parseInt(timeB.split(":")[0]);
+        let timeAMinutes = parseInt(timeA.split(":")[1]);
+        let timeBMinutes = parseInt(timeB.split(":")[1]);
+
+        let hours = Math.abs(timeAHours - timeBHours);
+        let minutes = Math.abs(timeAMinutes - timeBMinutes);
+
+        let totalMinutes = (hours * 60) + minutes;
+        return totalMinutes;
+    }
+    function parseSchedules() {
+        for (let i = 0; i < weekSchedules.length; i++) {
+            // FromTime - ToTime. calculate in minutes
+            // minutes divide by 60.
+            // initial starting time - starting time
+
+            let fillLength = time2Minutes(weekSchedules[i].FromTime, weekSchedules[i].ToTime);
+            // border 1px
+            let borderSize = fillLength / 60;
+            let top = time2Minutes(initialStart, weekSchedules[i].FromTime);
+            let height = fillLength + borderSize;
+
+            let dayElement = document.getElementById(`day-${weekSchedules[i].WeekDay}`);
+            dayElement.setAttribute("style", `height: ${height}px; top: ${top}px`);
+        }
+    }
+    // Make the text element draggable.
+    $(document).ready(function () {
+        parseSchedules();
+    });
+</script>
+</body>
+
+</html>

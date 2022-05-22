@@ -28,11 +28,6 @@
             border: none;
             max-width: 100%;
         }
-
-        #textArea {
-            display: block;
-            padding: 10px 5px;
-        }
         .closeIcon {
             margin-left: 5px;
             transition: all .2s;
@@ -50,7 +45,6 @@
         }
         .inputContainer {
             color: #fff;
-            padding: 5px;
             cursor: move;
         }
 
@@ -189,6 +183,7 @@
                 let top = parseInt(window.getComputedStyle(inputContainers[i]).top, 0);
                 // Assign text properties to the context.
                 ctx.fillStyle = window.getComputedStyle(inputContainers[i]).color;
+                ctx.font = "20px Georgia";
 
                 let child = inputContainers[i].getElementsByClassName('textInput');
                 let value = child[0].value;
@@ -200,6 +195,10 @@
                     ctx.fillText(str[i], left, top);
                 }
             }
+
+            // var image = canvas.toDataURL("image/png");
+
+            // image = image.replace('data:image/png;base64,', '');
         }
 
         // Download the processed image.
