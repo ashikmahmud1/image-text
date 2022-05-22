@@ -15,7 +15,7 @@
             font: 17px Calibri;
         }
 
-        .mainContainer {
+        .imageContainer {
             position: relative;
             padding: 0;
             min-width: 250px;
@@ -69,7 +69,7 @@
 
     <div>
         <!--The parent container, image and container for text (to place over the image)-->
-        <div class="mainContainer" id='mainContainer'>
+        <div class="imageContainer" id='imageContainer'>
 
             <!--The default image. You can select a different image too.-->
             <img src="https://www.encodedna.com/images/theme/easy-image-resizer.jpg" id="myimage" alt="" />
@@ -91,14 +91,14 @@
             $(this).parent("div").remove();      
         });
 
-        $('#mainContainer').dblclick(function (e) {
+        $('#imageContainer').dblclick(function (e) {
             var posX = $(this).position().left,
                 posY = $(this).position().top;
 
             var left = e.pageX - posX;
             var top = e.pageY - posY;
 
-            const mainContainer = document.getElementById("mainContainer");
+            const imageContainer = document.getElementById("imageContainer");
 
             var inputContainer = document.createElement("div");
             inputContainer.className = "inputContainer"; // set the CSS class
@@ -117,7 +117,7 @@
 
             inputContainer.appendChild(closeIcon);
             
-            mainContainer.appendChild(inputContainer);
+            imageContainer.appendChild(inputContainer);
             $('.inputContainer').draggable({
                 containment: 'parent' 
             });
